@@ -11,6 +11,7 @@ import StarsIcon from "@mui/icons-material/Stars";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 const icons = [
   {
     icon: <DashboardIcon />,
@@ -42,18 +43,35 @@ const icons = [
     icon: <InventoryIcon />,
     url: "/stock/products/",
   },
+  {
+    title: "Admin Panel",
+    icon: <SupervisorAccountIcon />,
+    url: "https://14240.fullstack.clarusway.com/admin",
+  },
 ];
 
+const iconStyle = {
+  color: "#eee",
+};
 const MenuListItems = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <List>
         {icons?.map((item, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
+            {item.url.includes("http") && (
+              <ListItemButton to={item.url} sx={iconStyle}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            )}
+            {!item.url.includes("http") && (
+              <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            )}
           </ListItem>
         ))}
       </List>
