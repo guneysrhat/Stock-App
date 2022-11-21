@@ -52,6 +52,9 @@ const icons = [
 
 const iconStyle = {
   color: "#eee",
+  "& .MuiSvgIcon-root": { color: "#eee" },
+  "&:hover": { color: "red" },
+  "&:hover .MuiSvgIcon-root": { color: "red" },
 };
 const MenuListItems = () => {
   const navigate = useNavigate();
