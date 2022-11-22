@@ -3,10 +3,15 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+
 import Typography from "@mui/material/Typography";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { btnHoverStyle } from "../assets/styles/globalStyle";
+import useStockCalls from "../hooks/useStockCall";
 
 export default function FirmCard({ firm }) {
+  const { deleteFirm } = useStockCalls;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -23,9 +28,12 @@ export default function FirmCard({ firm }) {
           {firm?.address}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+        <EditIcon sx={btnHoverStyle} />
+        <DeleteOutlineIcon
+          sx={btnHoverStyle}
+          onClick={() => deleteFirm(firm?.id)}
+        />
       </CardActions>
     </Card>
   );
