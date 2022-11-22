@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import useStockCall from "../hooks/useStockCall";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import FirmCard from "../components/FirmCard";
 //import axios from "axios";
 //import { useDispatch, useSelector } from "react-redux";
 //import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
@@ -42,9 +43,11 @@ const Firms = () => {
 
       <Button variant="contained">New Firm</Button>
       {firms?.length > 0 && (
-        <Grid container>
-          {firms?.map((item) => (
-            <Grid item></Grid>
+        <Grid container justifyContent="center" gap={3}>
+          {firms?.map((firm) => (
+            <Grid item>
+              <FirmCard key={firm.id} firm={firm} />
+            </Grid>
           ))}
         </Grid>
       )}
