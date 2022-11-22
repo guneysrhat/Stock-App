@@ -11,7 +11,7 @@ import { btnHoverStyle } from "../assets/styles/globalStyle";
 import useStockCalls from "../hooks/useStockCall";
 
 export default function FirmCard({ firm }) {
-  const { deleteFirm } = useStockCalls;
+  const { deleteFirm } = useStockCalls();
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
