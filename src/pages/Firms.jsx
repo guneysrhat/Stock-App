@@ -24,9 +24,10 @@ const Firms = () => {
   //     }
   //   };
 
-  const { getFirms } = useStockCall();
+  const { getFirms, getSales } = useStockCall();
   useEffect(() => {
     getFirms();
+    getSales();
   }, []);
 
   return <div>Firms</div>;
