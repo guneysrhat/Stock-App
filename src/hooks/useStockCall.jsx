@@ -1,9 +1,11 @@
+// import { axiosWithToken } from "../service/axiosInstance";
 import { useDispatch } from "react-redux";
 import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
-import { axiosWithToken } from "../service/axiosInstance";
+import useAxios from "./useAxios";
 
-const useStockCall = () => {
+const useStockCalls = () => {
   const dispatch = useDispatch();
+  const { axiosWithToken } = useAxios();
 
   const getStockData = async (url) => {
     dispatch(fetchStart());
@@ -18,10 +20,8 @@ const useStockCall = () => {
 
   const getFirms = () => getStockData("firms");
   const getSales = () => getStockData("sales");
-  const getProducts = () => getStockData("products");
-  const getBrands = () => getStockData("brands");
-  const getPurchases = () => getStockData("purchases");
-  return { getFirms, getSales, getProducts, getBrands, getPurchases };
+
+  return { getFirms, getSales };
 };
 
-export default useStockCall;
+export default useStockCalls;
