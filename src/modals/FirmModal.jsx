@@ -8,7 +8,7 @@ import { Button, TextField } from "@mui/material";
 export default function FirmModal({ open, setOpen, info, setInfo }) {
   const handleSumbit = (e) => {
     e.preventDefault();
-    setInfo(e.target.value);
+    
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
