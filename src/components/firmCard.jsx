@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { btnHoverStyle } from "../styles/globalStyle";
-import useStockCalls from "../hooks/useStockCall";
+import useStockCalls from "../hooks/useStockCalls";
 import { CardHeader } from "@mui/material";
 
 export default function FirmCard({ firm }) {
