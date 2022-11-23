@@ -29,7 +29,10 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
     <div>
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -75,7 +78,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
               onChange={handleChange}
             />
             <Button type="submit" variant="contained" size="large">
-              {(!info.id && "Submit Firm") || (info.id && "Update Firm")}
+              {(!info.id && "Submit Firm") || "Update Firm"}
             </Button>
           </Box>
         </Box>
