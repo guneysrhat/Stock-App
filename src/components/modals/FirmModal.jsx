@@ -2,18 +2,29 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { flexCenter, modalStyle } from "../styles/globalStyle";
+import { flexCenter, modalStyle } from "../../styles/globalStyle";
 import { Button, TextField } from "@mui/material";
+import useStockCalls from "../../hooks/useStockCalls";
 
 export default function FirmModal({ open, setOpen, info, setInfo }) {
-  const handleSumbit = (e) => {
+  const { postFirm, putFirm } = useStockCalls();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+    if (info.id) {
+      putFirm(info);
+    } else {
+      postFirm(info);
+    }
+    setOpen(false);
+    setInfo({});
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
   };
+
   return (
     <div>
       <Modal
@@ -23,7 +34,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modalStyle}>
-          <Box sx={flexCenter} componenet="form" onSubmit={handleSumbit}>
+          <Box component="form" onSubmit={handleSubmit} sx={flexCenter}>
             <TextField
               label="Firm Name"
               name="name"
@@ -33,6 +44,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
               value={info?.name || ""}
               onChange={handleChange}
             />
+
             <TextField
               label="Phone"
               name="phone"
@@ -42,6 +54,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
               value={info?.phone || ""}
               onChange={handleChange}
             />
+
             <TextField
               label="Address"
               name="address"
@@ -51,6 +64,7 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
               value={info?.address || ""}
               onChange={handleChange}
             />
+
             <TextField
               label="Image"
               name="image"
@@ -60,9 +74,8 @@ export default function FirmModal({ open, setOpen, info, setInfo }) {
               value={info?.image || ""}
               onChange={handleChange}
             />
-            <Button type="submit" variant="contained">
-              {" "}
-              Sumbit Firm
+            <Button type="submit" variant="contained" size="large">
+              {(!info.id && "Submit Firm") || (info.id && "Update Firm")}
             </Button>
           </Box>
         </Box>
