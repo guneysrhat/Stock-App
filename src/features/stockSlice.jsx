@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const stockSlice = createSlice({
-  name: "auth",
+  name: "stock",
 
   initialState: {
     purchases: null,
@@ -10,20 +10,23 @@ const stockSlice = createSlice({
     brands: null,
     firms: null,
     categories: null,
-    error: false,
     loading: false,
+    error: false,
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-
-    //! butun stateleri tek seferde almka icin payload dest. edildi. acildi
     getSuccess: (state, { payload: { data, url } }) => {
-      //! square bracekt yontemi ile url ile hepsine tek seferde ulasildi
-      state[url] = data;
       state.loading = false;
+      state[url] = data;
+    },
+    getProCatBrandsSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.products = payload[0];
+      state.categories = payload[1];
+      state.brands = payload[2];
     },
     fetchFail: (state) => {
       state.loading = false;
@@ -32,5 +35,6 @@ const stockSlice = createSlice({
   },
 });
 
-export const { fetchStart, getSuccess, fetchFail } = stockSlice.actions;
+export const { fetchStart, getSuccess, fetchFail, getProCatBrandsSuccess } =
+  stockSlice.actions;
 export default stockSlice.reducer;
