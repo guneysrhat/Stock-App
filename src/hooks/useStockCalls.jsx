@@ -30,6 +30,7 @@ const useStockCalls = () => {
   const getCategories = () => getStockData("categories");
   const getBrands = () => getStockData("brands");
   const getProducts = () => getStockData("products");
+  const getPurchases = () => getStockData("purchases");
 
   const getProCatBrands = async () => {
     dispatch(fetchStart());
@@ -103,6 +104,7 @@ const useStockCalls = () => {
     getProducts,
     getProCatBrands,
     getBrands,
+    getPurchases,
     deleteFirm,
     deleteBrand,
     deleteProduct,
